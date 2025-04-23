@@ -8,7 +8,7 @@ import cors from "cors";
 import path from "path";
 
 import { connectDB } from "./lib/db.js";
-
+//import aiRoutes from "./routes/aiRoutes.js";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 import { app, server } from "./lib/socket.js";
@@ -30,6 +30,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
+//app.use("/api", aiRoutes); 
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));

@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 import cloudinary from "../lib/cloudinary.js";
 import { getReceiverSocketId, io } from "../lib/socket.js";
@@ -97,3 +98,22 @@ export const deleteMessage = async (req,res)=>{
     res.status(500).json({ error: "Internal server error" });
   }
 }
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+export const generateResponse = async (req, res) => {
+  try {
+    const { prompt } = req.body;
+
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+
+    res.json({ response: text });
+  } catch (error) {
+    console.error("AI Error:", error);
+    res.status(500).json({ error: "Failed to generate response" });
+  }
+};
