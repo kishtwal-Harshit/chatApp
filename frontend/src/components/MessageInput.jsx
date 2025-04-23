@@ -164,12 +164,12 @@ const MessageInput = () => {
       {isDialogOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-            <h2 className="text-2xl mb-4">Enter your AI prompt</h2>
+            <h2 className="text-2xl mb-4">Enter your prompt</h2>
             <textarea
               className="w-full p-2 border rounded-lg"
               value={dialogText}
               onChange={(e) => setDialogText(e.target.value)}
-              placeholder="Ask your AI question..."
+              placeholder="Ask anything..."
               rows={4}
             />
             <div className="flex justify-end mt-4 gap-2">
